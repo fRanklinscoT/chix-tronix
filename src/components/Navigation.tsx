@@ -85,33 +85,30 @@ export default function Navigation() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border/50">
-          <div className="px-4 py-6 space-y-4">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left py-2 text-foreground hover:text-primary transition-colors"
-              >
-                {item.label}
-              </button>
-            ))}
+     {isOpen && (
+      <div className="md:hidden fixed top-[calc(100%+1px)] left-0 w-full bg-background/95 backdrop-blur-lg border-t border-border/50 z-40">
+        <div className="px-4 py-6 flex flex-col gap-4">
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => scrollToSection(item.href)}
+              className="block w-full text-left py-2 text-foreground hover:text-primary transition-colors"
+            >
+              {item.label}
+            </button>
+          ))}
 
-            {/* Wrap button in full-width flex container */}
-            <div className="w-full">
-              <Button 
-                variant="outline" 
-                size="md" 
-                className="w-full"
-                onClick={() => scrollToSection('#contact')}
-              >
-                Get Quote
-              </Button>
-            </div>
-          </div>
+          <Button 
+            variant="outline" 
+            size="md" 
+            className="w-full mt-2"
+            onClick={() => scrollToSection('#contact')}
+          >
+            Get Quote
+          </Button>
         </div>
-      )}
+      </div>
+    )}
     </nav>
   );
 }
