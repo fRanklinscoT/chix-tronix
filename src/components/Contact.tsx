@@ -182,7 +182,7 @@ export default function Contact() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-6 h-6 text-primary-foreground" />
+                      <info.icon className="w-6 h-6 text-blue-500" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-card-foreground mb-1">
