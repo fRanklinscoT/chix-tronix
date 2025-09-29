@@ -99,7 +99,7 @@ export default function Navigation() {
             ))}
             <Button 
               variant="outline" 
-              size="lg" 
+              size="md" 
               className="w-full mt-4"
               onClick={() => scrollToSection('#contact')}
             >
