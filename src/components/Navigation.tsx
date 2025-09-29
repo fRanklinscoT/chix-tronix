@@ -97,14 +97,18 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
-            <Button 
-              variant="outline" 
-              size="md" 
-              className="w-full mt-4"
-              onClick={() => scrollToSection('#contact')}
-            >
-              Get Quote
-            </Button>
+
+            {/* Wrap button in full-width flex container */}
+            <div className="w-full">
+              <Button 
+                variant="outline" 
+                size="md" 
+                className="w-full"
+                onClick={() => scrollToSection('#contact')}
+              >
+                Get Quote
+              </Button>
+            </div>
           </div>
         </div>
       )}
