@@ -1,0 +1,99 @@
+
+@import "tailwindcss";
+/* Professional Ctronix Design System - Automation & Security Company
+All colors MUST be HSL. Industrial blue and orange theme with dark backgrounds.
+*/
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background: 215 40% 98%;       /* very light blue-grey (not pure white) */
+    --foreground: 222 47% 12%;       /* dark navy text */
+
+    --card: 0 0% 100%;               /* white cards for contrast */
+    --card-foreground: 222 47% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 12%;
+
+    /* Brand Colors */
+    --primary: 215 75% 35%;          /* industrial dark blue */
+    --primary-foreground: 210 40% 98%; 
+
+    --secondary: 160 40% 40%;        /* muted green accent */
+    --secondary-foreground: 210 40% 98%;
+
+    /* Muted/Accents */
+    --muted: 210 30% 92%;
+    --muted-foreground: 215 20% 45%;
+
+    --accent: 160 45% 38%;           /* green hint accent */
+    --accent-foreground: 210 40% 98%;
+
+    /* Status */
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders / Inputs */
+    --border: 215 28% 85%;
+    --input: 215 28% 85%;
+    --ring: 215 75% 35%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 8%;        /* deep navy */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 215 80% 45%;          /* brighter blue on dark */
+    --primary-foreground: 222 47% 10%;
+
+    --secondary: 160 50% 35%;        /* rich green */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 160 50% 38%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 32% 22%;
+    --input: 217 32% 22%;
+    --ring: 215 80% 45%;
+  }
+}
