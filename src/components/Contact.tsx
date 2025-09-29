@@ -15,7 +15,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'info@ctronix.co.za',
+      details: 'Chixtronix@gmail.com',
       subDetails: 'We respond within 24 hours'
     },
     {
