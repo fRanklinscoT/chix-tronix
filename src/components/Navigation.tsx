@@ -98,7 +98,7 @@ export default function Navigation() {
               </button>
             ))}
             <Button 
-              variant="hero" 
+              variant="outline" 
               size="lg" 
               className="w-full mt-4"
               onClick={() => scrollToSection('#contact')}
