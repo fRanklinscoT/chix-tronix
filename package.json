@@ -84,5 +84,8 @@
     "rolldown-vite": {
       "vite": "^4.4.9"
     }
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1"
   }
 }

@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Zap, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-automation.jpg';
+import heroImage1 from '@/assets/hero-automation.jpg';
+import heroImage2 from '@/assets/hero-automation2.jpg';
+import heroImage3 from '@/assets/hero-automation3.jpg';
+import { useEffect, useState } from 'react';
+
+const heroImages = [heroImage1, heroImage2, heroImage3];
 
 export default function Hero() {
   const scrollToSection = (href: string) => {
@@ -11,18 +16,26 @@ export default function Hero() {
     }
   };
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000); 
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Professional automation and security solutions" 
-          className="w-full h-full object-cover"
+        <img
+          src={heroImages[currentIndex]}
+          alt="Professional automation and security solutions"
+          className="w-screen h-screen object-cover transition-opacity duration-1000"
         />
-        <div className="absolute inset-0 bg-neutral-900/40 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-neutral-900/40" />
       </div>
-
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-32 text-center">
         <motion.div

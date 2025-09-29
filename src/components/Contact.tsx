@@ -1,36 +1,52 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    service: '',
+    projectDetails: ''
+  });
+  const [status, setStatus] = useState('');
+
   const contactInfo = [
-    {
-      icon: Phone,
-      title: 'Call Us',
-      details: '+27 (0) 71 298 5905',
-      subDetails: 'Available 24/7 for emergencies'
-    },
-    {
-      icon: Mail,
-      title: 'Email Us',
-      details: 'Chixtronix@gmail.com',
-      subDetails: 'We respond within 24 hours'
-    },
-    {
-      icon: MapPin,
-      title: 'Visit Us',
-      details: 'Maphalle village, South Africa',
-      subDetails: 'Serving nationwide'
-    },
-    {
-      icon: Clock,
-      title: 'Business Hours',
-      details: 'Mon - Fri: 8AM - 7PM',
-      subDetails: 'Sat: 9AM - 4PM'
-    }
+    { icon: Phone, title: 'Call Us', details: '+27 (0) 71 298 5905', subDetails: 'Available 24/7 for emergencies' },
+    { icon: Mail, title: 'Email Us', details: 'Chixtronix@gmail.com', subDetails: 'We respond within 24 hours' },
+    { icon: MapPin, title: 'Visit Us', details: 'Maphalle village, South Africa', subDetails: 'Serving nationwide' },
+    { icon: Clock, title: 'Business Hours', details: 'Mon - Fri: 8AM - 7PM', subDetails: 'Sat: 9AM - 4PM' }
   ];
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+    
+    emailjs.send(
+      'service_l8gztcg',       // EmailJS Service ID
+      'template_lnd7pz1',      // EmailJS Template ID
+      {
+        from_name: `${form.firstName} ${form.lastName}`,
+        email: form.email,
+        phone: form.phone,
+        service: form.service,
+        message: form.projectDetails
+      },
+      'fRMzC2qk85AEeZ4t4'        // EmailJS Public Key
+    )
+    .then(() => setStatus('Quote request sent!'))
+    .catch(() => setStatus('Failed to send. Please try again.'));
+  };
 
   return (
     <section
@@ -39,7 +55,7 @@ export default function Contact() {
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +64,9 @@ export default function Contact() {
         >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Get Your Free
-            <span className="bg-gradient-to-tl from-black via-orange-800 to-blue-500 bg-clip-text text-transparent"> Quote Today</span>
+            <span className="bg-gradient-to-tl from-black via-orange-800 to-blue-500 bg-clip-text text-transparent">
+              {' '}Quote Today
+            </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Ready to secure your property with professional automation and security solutions? 
@@ -68,57 +86,68 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-card-foreground mb-6">
               Request a Quote
             </h3>
-            
-            <form className="space-y-6">
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-card-foreground mb-2">
-                    First Name
-                  </label>
-                  <Input 
-                    placeholder="Della.." 
+                  <label className="block text-sm font-medium text-card-foreground mb-2">First Name</label>
+                  <Input
+                    name="firstName"
+                    placeholder="Della"
                     className="bg-white/30 border-white/40 focus:border-primary"
+                    value={form.firstName}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-card-foreground mb-2">
-                    Last Name
-                  </label>
-                  <Input 
-                    placeholder="Raolane.." 
+                  <label className="block text-sm font-medium text-card-foreground mb-2">Last Name</label>
+                  <Input
+                    name="lastName"
+                    placeholder="Raolane"
                     className="bg-white/30 border-white/40 focus:border-primary"
+                    value={form.lastName}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
-                  Email Address
-                </label>
-                <Input 
-                  type="email" 
-                  placeholder="illumidev@example.com" 
+                <label className="block text-sm font-medium text-card-foreground mb-2">Email Address</label>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="illumidev@example.com"
                   className="bg-white/30 border-white/40 focus:border-primary"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
-                  Phone Number
-                </label>
-                <Input 
-                  type="tel" 
-                  placeholder="+27 123 456 789" 
+                <label className="block text-sm font-medium text-card-foreground mb-2">Phone Number</label>
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="+27 123 456 789"
                   className="bg-white/30 border-white/40 focus:border-primary"
+                  value={form.phone}
+                  onChange={handleChange}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
-                  Service Interested In
-                </label>
-                <select className="w-full px-3 py-2 bg-white/30 border border-white/40 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors">
-                  <option>Select a service</option>
+                <label className="block text-sm font-medium text-card-foreground mb-2">Service Interested In</label>
+                <select
+                  name="service"
+                  value={form.service}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 bg-white/30 border border-white/40 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+                  required
+                >
+                  <option value="">Select a service</option>
                   <option>Solar Energy Solutions</option>
                   <option>Automated Gates & Garage Doors</option>
                   <option>Electric Fencing</option>
@@ -129,25 +158,29 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-card-foreground mb-2">
-                  Project Details
-                </label>
-                <Textarea 
+                <label className="block text-sm font-medium text-card-foreground mb-2">Project Details</label>
+                <Textarea
+                  name="projectDetails"
                   placeholder="Tell us about your project requirements..."
                   rows={4}
                   className="bg-white/30 border-white/40 focus:border-primary resize-none"
+                  value={form.projectDetails}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="w-full"
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full bg-blue-500/95 backdrop-blur-2xl hover:bg-blue-500/80"
                 type="submit"
               >
                 Send Message
                 <Send className="w-5 h-5 ml-2" />
               </Button>
+
+              {status && <p className="mt-2 text-center text-sm text-primary">{status}</p>}
             </form>
           </motion.div>
 
@@ -159,46 +192,27 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">
-                Get in Touch
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our team of experts is ready to help you find the perfect security and automation 
-                solution for your needs. Reach out to us through any of the channels below.
-              </p>
-            </div>
-
-            {/* Contact Cards */}
-            <div className="grid gap-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-6 h-6 text-blue-500" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-card-foreground mb-1">
-                        {info.title}
-                      </h4>
-                      <p className="text-foreground font-medium">
-                        {info.details}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {info.subDetails}
-                      </p>
-                    </div>
+            {contactInfo.map((info, index) => (
+              <motion.div
+                key={info.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center flex-shrink-0">
+                    <info.icon className="w-6 h-6 text-blue-500" />
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                  <div>
+                    <h4 className="font-semibold text-card-foreground mb-1">{info.title}</h4>
+                    <p className="text-foreground font-medium">{info.details}</p>
+                    <p className="text-sm text-muted-foreground">{info.subDetails}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
 
             {/* Emergency Notice */}
             <motion.div

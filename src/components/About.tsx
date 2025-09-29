@@ -162,8 +162,8 @@ export default function About() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-4 left-4 text-foreground">
-                <h4 className="font-semibold text-lg">Automated Access</h4>
-                <p className="text-sm opacity-90">Smart, secure entry systems</p>
+                <h4 className="font-semibold text-lg">Smart Security</h4>
+                <p className="text-sm opacity-90">Smart, secure home technologies</p>
               </div>
             </div>
           </motion.div>

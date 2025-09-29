@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import logo from "@/assets/logo.png"
 
 interface NavItem {
   label: string;
@@ -46,9 +47,14 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold bg-gradient-to-tl from-black via-orange-800 to-blue-500 bg-clip-text text-transparent">
-          CTRONIX
+        <div className="h-16 w-auto">
+          <img 
+            src={logo}        // replace with your actual image path
+            alt="CTRONIX Logo"
+            className="h-full w-auto object-contain"
+          />
         </div>
+
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 text-foreground font-medium">
