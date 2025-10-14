@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface Project {
@@ -31,7 +31,7 @@ const projects: Record<string, Project[]> = {
 };
 
 export default function Projects() {
-  const location = useLocation();
+  const navigate = useNavigate();
   const selectedService = location.state?.service || "All Projects";
   const currentProjects = projects[selectedService] || [];
 
