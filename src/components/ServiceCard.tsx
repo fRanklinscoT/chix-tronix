@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import EditableInvoiceTemplate from './ui/pdfViewer';
+import { useNavigate } from 'react-router-dom';
 
 interface ServiceCardProps {
   title: string;
@@ -8,9 +10,13 @@ interface ServiceCardProps {
   icon: LucideIcon;
   features: string[];
   index: number;
+  link: string;
 }
 
-export default function ServiceCard({ title, description, icon: Icon, features, index }: ServiceCardProps) {
+export default function ServiceCard({ title, description, icon: Icon, features, index,link }: ServiceCardProps) {
+
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -53,6 +59,7 @@ export default function ServiceCard({ title, description, icon: Icon, features, 
           <Button 
             variant="ghost" 
             className="w-full group-hover:bg-primary/10 group-hover:text-primary"
+            onClick={() => navigate(link)}
           >
             Learn More
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

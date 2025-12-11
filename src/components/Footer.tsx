@@ -184,7 +184,7 @@ export default function Footer() {
                 Terms of Service
               </button>
               <span className="font-bold bg-gradient-to-tl from-black via-orange-800 to-blue-500 bg-clip-text text-transparent">
-                Illumidev-Solutions PTY ltd.
+                <a href='https://www.illumidev.co.za'>Illumidev-Solutions PTY ltd.</a>
               </span>
               <span className="text-primary">
                 Bright Ideas for a Brighter Future

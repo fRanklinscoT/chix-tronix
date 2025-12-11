@@ -103,6 +103,7 @@ export default function Services() {
               icon={service.icon}
               features={service.features}
               index={index}
+              link={`/gallery?service=${encodeURIComponent(service.title)}`}
             />
           ))}
         </div>
